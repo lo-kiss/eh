@@ -4,3 +4,5 @@
 it's eh
 
 build: `gcc -o eh main.c`
+
+created following [this tutorial](https://brennan.io/2015/01/16/write-a-shell-in-c/). hopefully i can add my own features soon
