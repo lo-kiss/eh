@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 /* Function declarations for built-in shell commands: */
 int sh_cd(char **args);
@@ -178,7 +179,13 @@ void sh_loop(void)
     int status;
 
     do {
-        printf(" > ");
+        char cwd[PATH_MAX];
+        if (getcwd(cwd, sizeof(cwd)) != NULL) {
+            printf("%s > ", cwd);
+        } else {
+            fprintf(stderr, "getcwd() error");
+            exit(EXIT_FAILURE);
+        }
         line = sh_read_line();
         args = sh_split_line(line);
         status = sh_execute(args);
